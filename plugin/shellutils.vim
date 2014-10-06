@@ -9,10 +9,9 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! s:ls(path, bang) "{{{1
-  "let path = empty(a:path) ? getcwd() : substitute(expand(a:path), '/$', '', 'g')
-  let path = empty(a:path) ? getcwd() : a:path
+  let path = empty(a:path) ? getcwd() : substitute(expand(a:path), '/$', '', 'g')
   if filereadable(path)
-    call s:file(path, '')
+    call shellutils#file(path, '')
     return 1
   endif
   if !isdirectory(path)
@@ -20,7 +19,6 @@ function! s:ls(path, bang) "{{{1
     return 0
   endif
 
-  " Escape &wildignore
   let save_ignore = &wildignore
   set wildignore=
   let filelist = glob(path . "/*")
@@ -28,46 +26,41 @@ function! s:ls(path, bang) "{{{1
     let filelist .= glob(path . "/.??*")
   endif
   let &wildignore = save_ignore
-
-  " Replace invisible character
   let filelist = substitute(filelist, '', '^M', 'g')
 
-  " Case of 'no file'
   if empty(filelist)
     echo "no file"
     return 0
   endif
 
-  " Append indicator (one of */@) to entries
   let lists = []
   for file in split(filelist, "\n")
     if isdirectory(file)
-      call add(lists, fnamemodify(file, ":t") . '/')
+      call add(lists, fnamemodify(file, ":t") . "/")
     else
       if executable(file)
-        call add(lists, fnamemodify(file, ":t") . '*')
+        call add(lists, fnamemodify(file, ":t") . "*")
       elseif getftype(file) == 'link'
-        call add(lists, fnamemodify(file, ":t") . '@')
+        call add(lists, fnamemodify(file, ":t") . "@")
       else
         call add(lists, fnamemodify(file, ":t"))
       endif
     endif
   endfor
 
-  " Colorize entries
   echon "[" . len(lists) . "] "
   highlight LsDirectory  cterm=bold ctermfg=NONE ctermfg=26        gui=bold guifg=#0096FF   guibg=NONE
   highlight LsExecutable cterm=NONE ctermfg=NONE ctermfg=Green     gui=NONE guifg=Green     guibg=NONE
   highlight LsSymbolick  cterm=NONE ctermfg=NONE ctermfg=LightBlue gui=NONE guifg=LightBlue guibg=NONE
 
   for item in lists
-    if item =~ '/$'
+    if item =~ '/'
       echohl LsDirectory | echon item[:-2] | echohl NONE
       echon item[-1:-1] . " "
-    elseif item =~ '*$'
+    elseif item =~ '*'
       echohl LsExecutable | echon item[:-2] | echohl NONE
       echon item[-1:-1] . " "
-    elseif item =~ '@$'
+    elseif item =~ '@'
       echohl LsSymbolick | echon item[:-2] | echohl NONE
       echon item[-1:-1] . " "
     else
@@ -149,8 +142,6 @@ function! s:mkdir(...) "{{{1
     endtry
     call add(mkdired, dir)
   endfor
-
-  " Echo created directories
   if len(mkdired) >= 1
     echo "Make directory" string(mkdired) "successfully!"
   endif
@@ -168,8 +159,6 @@ function! s:touch(...) "{{{1
     call writefile([], file)
     call add(touched, file)
   endfor
-
-  " Echo created files
   if len(touched) >= 1
     echo "Make file" string(touched) "successfully!"
   endif
@@ -259,7 +248,7 @@ function! s:cptool(mv, bang, ...) "{{{1
 
   " Display the results when copying or moving one or more files.
   if len(dst_success) >= 1
-    echo "Copy " . string(src) . " to " . string(dst_success) . " successfully!"
+    echo a:mv ? "Move" : "Copy" string(src) . " to " . string(dst_success) . " successfully!"
   endif
 endfunction
 
@@ -285,7 +274,6 @@ function! s:rm(bang, ...) "{{{1
       echohl WarningMsg | echo "The '" . file . "' does not exist" | echohl NONE
     endif
   endfor
-
   echo len(files) ? "Removed " . string(files) . "!" : "Removed nothing"
 endfunction
 
@@ -297,7 +285,6 @@ endfunction
 "   let g:shellutils_disable_commands = ['Ls', 'Mkdir']
 "
 " By doing so, :Ls and :Mkdir commands in other plugin are used preferentially.
-"
 if !exists('g:shellutils_disable_commands')
   let g:shellutils_disable_commands = ['']
 endif
@@ -315,14 +302,46 @@ let g:shellutils_shell_commands = [
       \ 'command! -nargs=* -bang -complete=file Rm    call s:rm(<q-bang>, <f-args>)',
       \ ]
 
-" Enable commands with the exception of list of g:shellutils_disable_commands
 for commands in g:shellutils_shell_commands
   if match(g:shellutils_disable_commands, substitute(commands, '^.*\(\u\l\+\).*$', '\1', 'g')) == -1
     execute commands
   endif
 endfor
 
-" __END__ {{{1
+if exists('g:shellutils_disable_all_commands')
+  if exists(':Mkdir') != 2
+    command! -nargs=+       -complete=dir  Mkdir call s:mkdir(<f-args>)
+  endif
+  if exists(':Touch') != 2
+    command! -nargs=+       -complete=file Touch call s:touch(<f-args>)
+  endif
+  if exists(':Cp')    != 2
+    command! -nargs=+ -bang -complete=file Cp    call s:cptool(0, <q-bang>, <f-args>)
+  endif
+  if exists(':Mv')    != 2
+    command! -nargs=+ -bang -complete=file Mv    call s:cptool(1, <q-bang>, <f-args>)
+  endif
+  if exists(':Cat')   != 2
+    command! -nargs=+ -bang -complete=file Cat   call s:cat("", <q-bang>, <f-args>)
+  endif
+  if exists(':Head')  != 2
+    command! -nargs=+ -bang -complete=file Head  call s:cat(10, <q-bang>, <f-args>)
+  endif
+  if exists(':Tail')  != 2
+    command! -nargs=+ -bang -complete=file Tail  call s:cat(-10, <q-bang>, <f-args>)
+  endif
+  if exists(':Ls')    != 2
+    command! -nargs=? -bang -complete=file Ls    call s:ls(<q-args>, <q-bang>)
+  endif
+  if exists(':File')  != 2
+    command! -nargs=? -bang -complete=file File  call s:file(<q-args>, <q-bang>)
+  endif
+  if exists(':Rm')    != 2
+    command! -nargs=* -bang -complete=file Rm    call s:rm(<q-bang>, <f-args>)
+  endif
+endif
+"}}}
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
