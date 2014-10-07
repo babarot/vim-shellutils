@@ -307,39 +307,6 @@ for commands in g:shellutils_shell_commands
     execute commands
   endif
 endfor
-
-if exists('g:shellutils_disable_all_commands')
-  if exists(':Mkdir') != 2
-    command! -nargs=+       -complete=dir  Mkdir call s:mkdir(<f-args>)
-  endif
-  if exists(':Touch') != 2
-    command! -nargs=+       -complete=file Touch call s:touch(<f-args>)
-  endif
-  if exists(':Cp')    != 2
-    command! -nargs=+ -bang -complete=file Cp    call s:cptool(0, <q-bang>, <f-args>)
-  endif
-  if exists(':Mv')    != 2
-    command! -nargs=+ -bang -complete=file Mv    call s:cptool(1, <q-bang>, <f-args>)
-  endif
-  if exists(':Cat')   != 2
-    command! -nargs=+ -bang -complete=file Cat   call s:cat("", <q-bang>, <f-args>)
-  endif
-  if exists(':Head')  != 2
-    command! -nargs=+ -bang -complete=file Head  call s:cat(10, <q-bang>, <f-args>)
-  endif
-  if exists(':Tail')  != 2
-    command! -nargs=+ -bang -complete=file Tail  call s:cat(-10, <q-bang>, <f-args>)
-  endif
-  if exists(':Ls')    != 2
-    command! -nargs=? -bang -complete=file Ls    call s:ls(<q-args>, <q-bang>)
-  endif
-  if exists(':File')  != 2
-    command! -nargs=? -bang -complete=file File  call s:file(<q-args>, <q-bang>)
-  endif
-  if exists(':Rm')    != 2
-    command! -nargs=* -bang -complete=file Rm    call s:rm(<q-bang>, <f-args>)
-  endif
-endif
 "}}}
 
 let &cpo = s:save_cpo
