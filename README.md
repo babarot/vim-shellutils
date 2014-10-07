@@ -9,7 +9,7 @@ Provides shell-like commands such as `'rm'`, `'ls'`, and so on from cmd-line.
 
 The vim-shellutils provides shell-like commands such as `'rm'`, `'ls'`, and so on. This plugin is written in pure Vim script. This is because you can execute shell-like commands as long as you have huge Vim 7.3+. In addition, thanks to this plugin, you can execute it without exiting the Vim. If you want to make some direcotries, all you have to do is type `:Mkdir dirA dirB` from cmd-line.
 
-![](http://cl.ly/image/0l3p3J3t3w1N/shellutils.gif)
+![](http://cl.ly/image/391D0P3Q0t2x/vim-shellutils.gif)
 
 ## Requirement
 
