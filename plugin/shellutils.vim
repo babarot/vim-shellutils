@@ -176,8 +176,9 @@ function! s:cptool(mv, bang, ...) "{{{1
 
   elseif a:0 == 2
     " If the src file is a directory.
-    if !filereadable(a:1)
-      echo printf("%s: %s: Is a directory", mv, a:1)
+    if !filereadable(expand(a:1))
+      "echo printf("%s: %s: Is a directory", mv, a:1)
+      echo printf("%s: %s: cannot read", mv, a:1)
       return 0
     endif
 
