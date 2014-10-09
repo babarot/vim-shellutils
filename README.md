@@ -84,7 +84,7 @@ Copy {src} to {dest}, or multiple {src}s to {directory}. Prompt whether to overw
 
 Rename {src} to {dest}, or move {src}s to {directory}. Prompt whether to overwrite existing regular destination files. If you don't do this, then please put a bang. (`:Mv!`)
 
-*For more information, see also [help](./doc/vim-shelltils.txt)*
+*For more information, see also [help](./doc/vim-shellutils.txt)*
 
 ## Installation
 
