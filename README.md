@@ -96,7 +96,7 @@ Put all files under `$VIM`.
 
 Install with the following command.
 
-	git clone https://github.com/b4b4r07/vim-shellutils ~/.vim/bundle/lightline.vim
+	git clone https://github.com/b4b4r07/vim-shellutils ~/.vim/bundle/vim-shellutils
 
 ### Vundle (<https://github.com/gmarik/Vundle.vim>)
 
