@@ -197,8 +197,8 @@ function! shellutils#cptool(mv, bang, ...) "{{{1
   endif
 
   " Coping or moving {{{2
-  let dst_success  = []
-  let reopen_stack  = []
+  let dst_success = []
+  let reopen_stack = []
   for file in src
     " Get the pull path of a src file
     let src_file = fnamemodify(file, ':p')

@@ -12,7 +12,9 @@ vim-shellutils
 ## Description
 
 `vim-shellutils` is a simple tool that provides UNIX shell-like commands such as `'rm'`, `'ls'`, and so on.
-The fact that is written in Vim script only will bring you a lot of advantages. For example, if you run the shell command in light manner, you can perform processing as close as possible to the shell command without exiting Vim. With further say, this fact shows that does not depend on the platform you want to run. This means that Windows is OK.
+
+The fact that is written in Vim script only will bring you a lot of advantages. For example, if you run the shell command in light manner, you can emulate the shell command without exiting Vim. With further say, this fact shows that does not depend on the platform you want to run. This means that Windows is OK.
+
 If even Vim and `vim-shellutils`, it is possible to realize a shell command mock.
 
 ## Requirement
@@ -41,6 +43,10 @@ Other commands that are available:
 - ...
 
 For more information, see also [help](./doc/vim-shellutils.txt).
+
+**NOTE:**
+
+However, a different point only UNIX command interface, is the case where the argument is not given. In the case of UNIX command, in spite of the command to take the arguments, it is an error if no argument is given. On the other hand, if no argument is given in `vim-shellutils`, it will be interpret the current buffer as an argument that has been omitted.
 
 ## Installation
 
