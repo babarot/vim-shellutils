@@ -1,6 +1,8 @@
 vim-shellutils
 ===
 
+[![Build Status](https://travis-ci.org/b4b4r07/vim-shellutils.svg?branch=master)](https://travis-ci.org/b4b4r07/vim-shellutils)
+
 ## Overview
 
 `vim-shellutils` is a simple, UNIX Shell-like commands (e.g. `/bin/ls`) tool for run in a non-Unix environment (Windows ;-), written in Vim script only. 
