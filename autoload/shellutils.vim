@@ -275,6 +275,15 @@ endfunction
 
 "__END__ {{{1
 
+function! shellutils#scope()
+  return s:
+endfunction
+
+function! shellutils#sid()
+  return maparg('<SID>', 'n')
+endfunction
+nnoremap <SID>  <SID>
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
