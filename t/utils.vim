@@ -17,8 +17,7 @@ describe 'Mkdir'
 
   it 'already exists'
     let directory = '/tmp/test'
-    call Call('shellutils#mkdir', directory)
-    Expect isdirectory(directory) to_be_false
+    Expect Call('shellutils#mkdir', directory) to_be_false
   end
 end
 
