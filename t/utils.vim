@@ -14,11 +14,17 @@ describe 'Mkdir'
     call Call('shellutils#mkdir', directory)
     Expect isdirectory(directory) to_be_true
   end
+
+  it 'already exists'
+    let directory = '/tmp/test'
+    call Call('shellutils#mkdir', directory)
+    Expect isdirectory(directory) to_be_false
+  end
 end
 
 describe 'Touch'
   it '/tmp/file'
-    let file = '/tmp/test'
+    let file = '/tmp/file'
     call Call('shellutils#touch', file)
     Expect filereadable(file) to_be_true
   end
