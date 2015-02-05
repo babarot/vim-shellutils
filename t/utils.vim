@@ -57,8 +57,9 @@ describe 'Ls'
 
     let list_result = split(substitute(result, '  *', ' ', 'g'))
 
-    "echo "[DEBUG]".string(result)
-    "echo "[DEBUG]".list_result
+    echo "[DEBUG]".string(result)
+    echo "[DEBUG]".string(list_result)
+
     Expect len(list_result) == 4
     Expect list_result == ["3:", "a", "b", "c"]
   end
