@@ -38,7 +38,8 @@ end
 describe 'Ls'
   before
     let s:workspace = expand("~/ls_test")
-    call mkdir(s:workspace)
+    "call mkdir(s:workspace)
+    Mkdir s:workspace
   end
 
   after
