@@ -1,4 +1,15 @@
-language: ruby
-rvm:
-  - 1.9.3
-script: rake ci
+language: generic
+
+env:
+  - PPA=yes
+  - PPA=no
+
+install:
+  - if [ x"$PPA" = "xyes" ] ; then sudo add-apt-repository ppa:pi-rho/dev -y; fi
+  - sudo apt-get update -q
+  - sudo apt-get install vim-gtk
+  - git clone https://github.com/thinca/vim-themis
+
+script:
+  - vim --version
+  - vim-themis/bin/themis --reporter spec
