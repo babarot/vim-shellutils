@@ -46,11 +46,12 @@ describe 'Ls'
     Touch a b c
   end
 
-  it 'ckeck Ls'
-    let result = Call('shellutils#ls', s:workspace, '')
-    Expect result to_be_true
+  it 'Ls return'
+    Expect Call('shellutils#ls', s:workspace, '') to_be_true
+  end
 
-    let list_result = split(result)
+  it 'Ls output'
+    let list_result = split(Call('shellutils#ls', s:workspace, ''))
     Expect len(list_result) == 4
     Expect list_result == ["3:", "a", "b", "c"]
   end
