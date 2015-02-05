@@ -38,11 +38,12 @@ end
 describe 'Ls'
   before
     Mkdir ~/ls_test
-    execute 'lcd' expand("~/ls_test")
   end
 
   after
-    Touch a b c
+    Touch ~/ls_test/a
+    Touch ~/ls_test/b
+    Touch ~/ls_test/c
   end
 
   it 'Ls return'
