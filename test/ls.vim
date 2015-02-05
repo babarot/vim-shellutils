@@ -3,15 +3,17 @@ let s:assert = themis#helper('assert')
 
 function! s:suite.basically_check()
     let w = expand('~/ls_test')
-    call mkdir(w)
+    if !isdirectory(w)
+        call mkdir(w)
+    endif
     execute 'cd' w
-
     for f in ['a', 'b', 'c']
         call shellutils#touch(f)
     endfor
 
+    call s:assert.true(shellutils#ls(w, ''))
     redir => result
-      silent! call shellutils#ls(w, '')
+        silent! call shellutils#ls(w, '')
     redir END
 
     let list_result = split(result, ' ')
@@ -21,16 +23,57 @@ endfunction
 
 function! s:suite.ls_spaced_filename()
     let w = expand('~/ls_test2')
-    call mkdir(w)
+    if !isdirectory(w)
+        call mkdir(w)
+    endif
     execute 'cd' w
-
     call shellutils#touch('spaced filename')
 
+    call s:assert.true(shellutils#ls(w, ''))
     redir => result
-      silent! call shellutils#ls(w, '')
+        silent! call shellutils#ls(w, '')
     redir END
 
     let list_result = split(result, ' ')
     call s:assert.equals(len(list_result), 3)
     call s:assert.not_equals(list_result, ["[2]", "spaced", "filename"])
+endfunction
+
+function! s:suite.ls_non_existing()
+    let res = shellutils#ls('~/non_existing', '')
+    call s:assert.false(res)
+endfunction
+
+function! s:suite.ls_no_file()
+    let w = expand('~/ls_test3')
+    if !isdirectory(w)
+        call mkdir(w)
+    endif
+    execute 'cd' w
+
+    call s:assert.false(shellutils#ls(w, ''))
+    redir => result
+        silent! call shellutils#ls(w, '')
+    redir END
+    call s:assert.match(result, 'no file')
+endfunction
+
+function! s:suite.ls_bang()
+    let w = expand('~/ls_test4')
+    if !isdirectory(w)
+        call mkdir(w)
+    endif
+    execute 'cd' w
+    for f in ['a', 'b', 'c', '.d', '.e']
+        call shellutils#touch(f)
+    endfor
+
+    call s:assert.true(shellutils#ls(w, '!'))
+    redir => result
+        silent! call shellutils#ls(w, '!')
+    redir END
+
+    let list_result = split(result, ' ')
+    call s:assert.equals(len(list_result), 6)
+    call s:assert.equals(list_result, ["[5]", "a", "b", "c", ".d", "e"])
 endfunction
