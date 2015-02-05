@@ -52,7 +52,8 @@ describe 'Ls'
 
   it 'Ls output'
     redir => result
-      call Call('shellutils#ls', '~/ls_test', '')
+      "call Call('shellutils#ls', '~/ls_test', '')
+      Ls ~/ls_test
     redir END
 
     let list_result = split(result)
