@@ -55,7 +55,10 @@ describe 'Ls'
       call Call('shellutils#ls', expand("~/ls_test"), '')
     redir END
 
-    let list_result = split(result)
+    let list_result = split(substitute(result, '  ', ' ', 'g'))
+
+    echo "[DEBUG]".result
+    echo "[DEBUG]".list_result
     Expect len(list_result) == 4
     Expect list_result == ["3:", "a", "b", "c"]
   end
