@@ -75,5 +75,9 @@ function! s:suite.ls_bang()
 
     let list_result = split(result, ' ')
     call s:assert.equals(len(list_result), 6)
-    call s:assert.equals(list_result, ["[5]", "a", "b", "c", ".d", "e"])
+    call s:assert.equals(list_result, ["[5]", "a", "b", "c", ".d", ".e"])
+endfunction
+
+function! s:suite.ls_file()
+    "TODO:
 endfunction
