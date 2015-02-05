@@ -37,22 +37,20 @@ end
 
 describe 'Ls'
   before
-    let s:workspace = expand("~/ls_test")
-    "call mkdir(s:workspace)
-    Mkdir s:workspace
+    Mkdir expand("~/ls_test")
   end
 
   after
-    execute 'cd' s:workspace
+    execute 'cd' expand("~/ls_test")
     Touch a b c
   end
 
   it 'Ls return'
-    Expect Call('shellutils#ls', s:workspace, '') to_be_true
+    Expect Call('shellutils#ls', expand("~/ls_test"), '') to_be_true
   end
 
   it 'Ls output'
-    let list_result = split(Call('shellutils#ls', s:workspace, ''))
+    let list_result = split(Call('shellutils#ls', expand("~/ls_test"), ''))
     Expect len(list_result) == 4
     Expect list_result == ["3:", "a", "b", "c"]
   end
