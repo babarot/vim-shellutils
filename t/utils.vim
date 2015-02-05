@@ -37,7 +37,7 @@ end
 
 describe 'Ls'
   before
-    Mkdir expand("~/ls_test")
+    Mkdir ~/ls_test
     execute 'lcd' expand("~/ls_test")
   end
 
