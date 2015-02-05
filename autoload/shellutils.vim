@@ -18,7 +18,7 @@ function! shellutils#ls(path, bang) "{{{1
   set wildignore=
   let filelist = glob(path . "/*")
   if !empty(a:bang)
-    let filelist .= glob(path . "/.?*")
+    let filelist .= glob(path . "/.*[^.]")
   endif
   let &wildignore = save_ignore
   let filelist = substitute(filelist, '', '^M', 'g')
@@ -79,7 +79,7 @@ function! shellutils#file(file, bang) "{{{1
   echon ftime . " "
   echon "("
   if ftype ==# 'dir'
-    echon len(split(glob(fpath. "/*") . string(empty(a:bang) ? '' : glob(fpath . "/.?*")), "\n"))
+    echon len(split(glob(fpath. "/*") . string(empty(a:bang) ? '' : glob(fpath . "/.*[^.]")), "\n"))
   else
     let size = fsize
     if size < 0
