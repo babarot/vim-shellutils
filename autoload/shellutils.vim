@@ -18,7 +18,7 @@ function! shellutils#ls(path, bang) "{{{1
   set wildignore=
   let filelist = glob(path . "/*")
   if !empty(a:bang)
-    let filelist .= glob(path . "/.*[^.]")
+    let filelist .= "\n".glob(path . "/.*[^.]")
   endif
   let &wildignore = save_ignore
   let filelist = substitute(filelist, '', '^M', 'g')
