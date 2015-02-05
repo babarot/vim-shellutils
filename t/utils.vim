@@ -51,7 +51,11 @@ describe 'Ls'
   end
 
   it 'Ls output'
-    let list_result = split(Call('shellutils#ls', expand("~/ls_test"), ''))
+    redir => result
+      Call('shellutils#ls', expand("~/ls_test"), '')
+    redir END
+
+    let list_result = split(result)
     Expect len(list_result) == 4
     Expect list_result == ["3:", "a", "b", "c"]
   end
