@@ -47,7 +47,7 @@ describe 'Ls'
   end
 
   it 'ckeck Ls'
-    let result = Call('shellutils#ls', s:workspace)
+    let result = Call('shellutils#ls', s:workspace, '')
     Expect result to_be_true
 
     let list_result = split(result)
