@@ -52,14 +52,10 @@ describe 'Ls'
 
   it 'Ls output'
     redir => result
-      call Call('shellutils#ls', expand("~/ls_test"), '')
+      call Call('shellutils#ls', ~/ls_test, '')
     redir END
 
-    let list_result = split(substitute(result, '  *', ' ', 'g'))
-
-    echo "[DEBUG]".string(result)
-    echo "[DEBUG]".string(list_result)
-
+    let list_result = split(result)
     Expect len(list_result) == 4
     Expect list_result == ["3:", "a", "b", "c"]
   end
