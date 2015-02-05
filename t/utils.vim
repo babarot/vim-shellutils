@@ -37,17 +37,17 @@ end
 
 describe 'Ls'
   before
-    let workspace = expand("~/ls_test")
-    call mkdir(workspace)
+    let s:workspace = expand("~/ls_test")
+    call mkdir(s:workspace)
   end
 
   after
-    execute 'cd' workspace
+    execute 'cd' s:workspace
     Touch a b c
   end
 
   it 'ckeck Ls'
-    let result = Call('shellutils#ls', workspace)
+    let result = Call('shellutils#ls', s:workspace)
     Expect result to_be_true
 
     let list_result = split(result)
