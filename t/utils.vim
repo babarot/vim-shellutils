@@ -34,3 +34,24 @@ describe 'Touch'
     Expect filereadable(file) to_be_true
   end
 end
+
+describe 'Ls'
+  before
+    let workspace = expand("~/ls_test")
+    call mkdir(workspace)
+  end
+
+  after
+    execute 'cd' workspace
+    Touch a b c
+  end
+
+  it 'ckeck Ls'
+    let result = Call('shellutils#ls', workspace)
+    Expect result to_be_true
+
+    let list_result = split(result)
+    Expect len(list_result) == 4
+    Expect list_result == ["3:", "a", "b", "c"]
+  end
+end
