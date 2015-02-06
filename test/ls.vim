@@ -104,10 +104,11 @@ function! s:suite.ls_file()
         let f = w . '/file'
     endif
     call s:assert.true(shellutils#ls(f, ''))
-    redir => result
-        call shellutils#ls(f, '')
-    redir END
+    call s:assert.true(shellutils#file(f, ''))
 
-    call s:assert.match(substitute(result, '^  *', '', ''),
-                \ 'rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
+    "redir => result
+    "    call shellutils#ls(f, '')
+    "redir END
+    "call s:assert.match(substitute(result, '^  *', '', ''),
+    "            \ 'rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
 endfunction

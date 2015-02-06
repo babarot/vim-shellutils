@@ -95,6 +95,8 @@ function! shellutils#file(file, bang) "{{{1
   endif
   echon ") "
   echon fname
+
+  return 1
 endfunction
 
 function! shellutils#cat(type, bang, ...) "{{{1
