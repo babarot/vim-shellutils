@@ -128,8 +128,7 @@ endfunction
 
 function! shellutils#mkdir(...) "{{{1
   let mkdired = []
-  for dir in a:000
-    let dir = expand(dir)
+  for dir in map(copy(a:000), 'expand(v:val)')
     try
       call mkdir(dir, 'p')
     catch /^Vim\%((\a\+)\)\=:E739/
@@ -148,7 +147,7 @@ endfunction
 
 function! shellutils#touch(...) "{{{1
   let touched = []
-  for file in a:000
+  for file in map(copy(a:000), 'expand(v:val)')
     if getftype(file) != ''
       echohl WarningMsg
       echo printf('Touch: %s: File exists', file)
@@ -160,6 +159,7 @@ function! shellutils#touch(...) "{{{1
   endfor
   if len(touched) >= 1
     echo "Make file" string(touched) "successfully!"
+    return 1
   endif
 endfunction
 
