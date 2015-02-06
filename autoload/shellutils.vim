@@ -262,7 +262,7 @@ function! shellutils#rm(bang, ...) "{{{1
     if !empty(a:bang) || nr2char(getchar()) ==? 'y'
       if isdirectory(file)
         "echo "This shellutils#rm does not support the removing directory."
-        let to = expand("/tmp/shellutils_rm")
+        let to = expand($HOME."/.tmp/shellutils_rm")
         if !isdirectory(to)
           call shellutils#mkdir(to)
         endif
