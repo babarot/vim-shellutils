@@ -7,7 +7,7 @@ function! s:before_each()
 endfunction
 
 function! s:suite.rm_basically_check()
-    call s:assert.true(shellutils#rm('', s:file))
+    call s:assert.true(shellutils#rm('!', s:file))
 endfunction
 
 function! s:suite.rm_check_if_success()
@@ -32,7 +32,7 @@ endfunction
 
 function! s:suite.rm_if_directory()
     call shellutils#mkdir('~/rm_test2')
-    call shellutils#rm('', '~/rm_test2')
+    call shellutils#rm('!', '~/rm_test2')
     call s:assert.false(isdirectory(expand('~/rm_test2')))
     call s:assert.true(isdirectory(expand('/tmp/shellutils_rm/rm_test2')))
 endfunction

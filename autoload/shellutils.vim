@@ -266,10 +266,9 @@ function! shellutils#rm(bang, ...) "{{{1
         if !isdirectory(to)
           call shellutils#mkdir(to)
         endif
-        if rename(file, to . '/' . fnamemodify(file, ":t")) != 0
-          return 0
+        if rename(file, to . '/' . fnamemodify(file, ":t")) == 0
+          call add(files, file)
         endif
-        call add(files, file)
       elseif filereadable(file)
         if delete(file) == 0
           call add(files, file)
@@ -283,6 +282,7 @@ function! shellutils#rm(bang, ...) "{{{1
       endif
     endif
   endfor
+
   echo len(files) ? "Removed " . string(files) . "!" : "Removed nothing"
   return 1
 endfunction
