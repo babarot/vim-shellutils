@@ -129,6 +129,7 @@ endfunction
 function! shellutils#mkdir(...) "{{{1
   let mkdired = []
   for dir in a:000
+    let dir = expand(dir)
     try
       call mkdir(dir, 'p')
     catch /^Vim\%((\a\+)\)\=:E739/
@@ -141,6 +142,7 @@ function! shellutils#mkdir(...) "{{{1
   endfor
   if len(mkdired) >= 1
     echo "Make directory" string(mkdired) "successfully!"
+    return 1
   endif
 endfunction
 
