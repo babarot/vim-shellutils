@@ -1,3 +1,11 @@
+let s:is_windows = has('win16') || has('win32') || has('win64')
+let s:is_cygwin = has('win32unix')
+let s:is_win = s:is_cygwin || s:is_windows
+let s:is_mac = !s:is_windows && !s:is_cygwin
+      \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+      \    (!executable('xdg-open') &&
+      \    system('uname') =~? '^darwin'))
+
 let s:suite = themis#suite('ls')
 let s:assert = themis#helper('assert')
 
@@ -75,7 +83,11 @@ function! s:suite.ls_bang()
 
     let list_result = split(result, ' ')
     call s:assert.equals(len(list_result), 6)
-    call s:assert.equals(list_result, ["[5]", "a", "b", "c", ".d", ".e"])
+    if s:is_win
+        call s:assert.equals(list_result, ["[5]", "a", "b", "c", ".d*", ".e*"])
+    else
+        call s:assert.equals(list_result, ["[5]", "a", "b", "c", ".d", ".e"])
+    endif
 endfunction
 
 function! s:suite.ls_file()
@@ -86,12 +98,12 @@ function! s:suite.ls_file()
     execute 'cd' w
     call shellutils#touch('file')
 
-    let f = w . '/file'
+    let f = w . s:is_win ? '\' : '/' . 'file'
     call s:assert.true(shellutils#ls(f, ''))
     redir => result
         call shellutils#ls(f, '')
     redir END
 
     call s:assert.match(substitute(result, '^  *', '', ''),
-                \ '\[\w\+\] rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
+                \ '\[file] rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
 endfunction
