@@ -266,6 +266,7 @@ function! shellutils#rm(bang, ...) "{{{1
         if !isdirectory(to)
           call shellutils#mkdir(to)
         endif
+        let file = expand(file)
         if rename(file, to . '/' . fnamemodify(file, ":t")) == 0
           call add(files, file)
         endif

@@ -35,4 +35,10 @@ function! s:suite.rm_if_directory()
     call shellutils#rm('!', '~/rm_test2')
     call s:assert.false(isdirectory(expand('~/rm_test2')))
     call s:assert.true(isdirectory(expand('/tmp/shellutils_rm/rm_test2')))
+
+    call shellutils#mkdir('~/rm_test2')
+    redir => result
+        silent! call shellutils#rm('!', '~/rm_test2')
+    redir END
+    call s:assert.match(result, "Removed")
 endfunction
