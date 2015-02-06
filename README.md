@@ -2,6 +2,7 @@ vim-shellutils
 ===
 
 [![Build Status](https://travis-ci.org/b4b4r07/vim-shellutils.svg?branch=master)](https://travis-ci.org/b4b4r07/vim-shellutils)
+[![Build status](https://ci.appveyor.com/api/projects/status/nth12he8ajal7d4o?svg=true)](https://ci.appveyor.com/project/b4b4r07/vim-shellutils)
 
 ## Overview
 
