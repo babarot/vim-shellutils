@@ -1,7 +1,7 @@
 let s:suite = themis#suite('ls')
 let s:assert = themis#helper('assert')
 
-function! s:suite.basically_check()
+function! s:suite.ls_basically_check()
     let w = expand('~/ls_test')
     if !isdirectory(w)
         call mkdir(w)
@@ -79,5 +79,19 @@ function! s:suite.ls_bang()
 endfunction
 
 function! s:suite.ls_file()
-    "TODO:
+    let w = expand('~/ls_test5')
+    if !isdirectory(w)
+        call mkdir(w)
+    endif
+    execute 'cd' w
+    call shellutils#touch('file')
+
+    let f = w . '/file'
+    call s:assert.true(shellutils#ls(f, ''))
+    redir => result
+        call shellutils#ls(f, '')
+    redir END
+
+    call s:assert.match(substitute(result, '^  *', '', ''),
+                \ '\[\w\+\] rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
 endfunction
