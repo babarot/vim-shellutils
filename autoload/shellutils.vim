@@ -254,9 +254,16 @@ endfunction
 
 function! shellutils#rm(bang, ...) "{{{1
   let files = []
-  for file in a:0 ? a:000 : split(simplify(expand('%:p')))
+  for file in a:0 ? map(copy(a:000), 'expand(v:val)') : split(simplify(expand('%:p')))
     if isdirectory(file)
-      echo "This shellutils#rm does not support the removing directory."
+      "echo "This shellutils#rm does not support the removing directory."
+      let to = expand("/tmp/shellutils_rm")
+      if !isdirectory(to)
+        call shellutils#mkdir(to)
+      endif
+      if rename(file, to . '/' . fnamemodify(file, ":t")) != 0
+        return 0
+      endif
     elseif filereadable(file)
       if empty(a:bang)
         redraw | echo 'Delete "' . file . '"? [y/N]: '
@@ -275,6 +282,7 @@ function! shellutils#rm(bang, ...) "{{{1
     endif
   endfor
   echo len(files) ? "Removed " . string(files) . "!" : "Removed nothing"
+  return 1
 endfunction
 
 "__END__ {{{1
