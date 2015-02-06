@@ -98,7 +98,11 @@ function! s:suite.ls_file()
     execute 'cd' w
     call shellutils#touch('file')
 
-    let f = w . s:is_win ? '\' : '/' . 'file'
+    if s:is_win
+        let f = w . '\file'
+    else
+        let f = w . '/file'
+    endif
     call s:assert.true(shellutils#ls(f, ''))
     redir => result
         call shellutils#ls(f, '')
