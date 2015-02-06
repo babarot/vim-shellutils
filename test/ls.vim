@@ -109,5 +109,5 @@ function! s:suite.ls_file()
     redir END
 
     call s:assert.match(substitute(result, '^  *', '', ''),
-                \ '.*file.* rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
+                \ 'rw-r--r-- ' . strftime("%Y-%m-%d %T", getftime(f)) . ' (0B) ' . f)
 endfunction
