@@ -6,7 +6,7 @@ vim-shellutils
 
 ## Overview
 
-`vim-shellutils` is a simple, UNIX Shell-like commands (e.g. `/bin/ls`) tool for run in a non-Unix environment (Windows ;-), written in Vim script only. 
+`vim-shellutils` is a simple, UNIX Shell commands (e.g. `/bin/ls`) emulator that works even in a non-Unix environment (Windows ;-), written in Vim script.
 
 ***DEMO***
 
@@ -33,66 +33,62 @@ Vim 7.3 or more
 
 
 ```vim
-:Ls some_file.vim
-:Ls some_dir/
-:Ls ~
+:Ls some_directory
 ```
 
 Other commands that are available:
 
-- `:Mv`
-- `:Cp`
-- `:Mkdir`
-- ...
+| Shell | Vim |
+|---|---|
+| `ls` | `:Ls` |
+| `mv` | `:Mv` |
+| `cp` | `:Cp` |
+| `file` | `:File` |
+| `cat` | `:Cat` |
+| `head` | `:Head` |
+| `tail` | `:Tail` |
+| `touch` | `:Touch` |
+| `mkdir` | `:Mkdir` |
 
-For more information, see also [help](./doc/vim-shellutils.txt).
+For more usage and details, see [docmentation](./doc/vim-shellutils.txt).
 
-**NOTE:**
+### Features
 
-However, a different point only UNIX command interface, is the case where the argument is not given. In the case of UNIX command, in spite of the command to take the arguments, it is an error if no argument is given. On the other hand, if no argument is given in `vim-shellutils`, it will be interpret the current buffer as an argument that has been omitted.
+Unlike a complete UNIX shell command, the command is emulated by `vim-shellutils` is optimized for Vim. In other words, the grammar of `vim-shellutils` command and shell command is not the same at all. It is when the argument is less than the original. The emulated command interpret the current buffer as an argument in the automatic when the argument is omitted.
+
+- Example (when you're editing the `~/.vimrc`):
+
+	`:Cp ~/test` and `:Cp ~/.vimrc ~/test` are the same
+	`:Rm ` and `:Rm ~/.vimrc` are the same
+
+This means that it is possible to perform more easily shell command mock. Again, for more detailed description, please refer to the plugin's [help](./doc/vim-shellutils.txt)
 
 ## Installation
 
 ### Manually
 
-Put all files under `$VIM`.
+- [Pathogen](https://github.com/tpope/vim-pathogen)
 
-### Pathogen (<https://github.com/tpope/vim-pathogen>)
+	Put all files under `$VIM`. Install with the following command.
 
-Install with the following command.
+		git clone https://github.com/b4b4r07/vim-shellutils ~/.vim/bundle/vim-shellutils
 
-	git clone https://github.com/b4b4r07/vim-shellutils ~/.vim/bundle/vim-shellutils
-
-### Vundle (<https://github.com/gmarik/Vundle.vim>)
+### Plugin Manager
 
 Add the following configuration to your `.vimrc`.
 
-	Plugin 'b4b4r07/vim-shellutils'
+- [NeoBundle](https://github.com/Shougo/neobundle.vim)
 
-Install with `:PluginInstall`.
+		NeoBundle 'b4b4r07/vim-shellutils'
 
-- NOTE: [Bundle interface change](https://github.com/gmarik/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L372-L396).
+- [Vundle]()
 
+		Plugin 'b4b4r07/vim-shellutils'
 
-### NeoBundle (<https://github.com/Shougo/neobundle.vim>)
+- [vim-plug]()
 
-Add the following configuration to your `.vimrc`.
-
-	NeoBundle 'b4b4r07/vim-shellutils'
-
-Install with `:NeoBundleInstall`.
+		Plug 'b4b4r07/vim-shellutils'
 
 ## Licence
 
 The MIT License ([MIT](http://opensource.org/licenses/MIT))
-
-## Author
-
-| [![twitter/b4b4r07](http://www.gravatar.com/avatar/8238c3c0be55b887aa9d6d59bfefa504.png)](http://twitter.com/b4b4r07 "@b4b4r07 on Twitter") |
-|:---:|
-| [b4b4r07](https://twitter.com/intent/follow?screen_name=b4b4r07 "Follow @b4b4r07 on Twitter") |
-
-## See also
-
-- [Help](./doc/vim-shelltils.txt)
-- [b4b4r07/vim-autocdls](https://github.com/b4b4r07/vim-autocdls)
