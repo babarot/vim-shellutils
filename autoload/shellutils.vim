@@ -255,20 +255,22 @@ endfunction
 function! shellutils#rm(bang, ...) "{{{1
   let files = []
   for file in a:0 ? map(copy(a:000), 'expand(v:val)') : split(simplify(expand('%:p')))
-    if isdirectory(file)
-      "echo "This shellutils#rm does not support the removing directory."
-      let to = expand("/tmp/shellutils_rm")
-      if !isdirectory(to)
-        call shellutils#mkdir(to)
-      endif
-      if rename(file, to . '/' . fnamemodify(file, ":t")) != 0
-        return 0
-      endif
-    elseif filereadable(file)
-      if empty(a:bang)
-        redraw | echo 'Delete "' . file . '"? [y/N]: '
-      endif
-      if !empty(a:bang) || nr2char(getchar()) ==? 'y'
+    if empty(a:bang)
+      redraw | echo 'Delete "' . file . '"? [y/N]: '
+    endif
+
+    if !empty(a:bang) || nr2char(getchar()) ==? 'y'
+      if isdirectory(file)
+        "echo "This shellutils#rm does not support the removing directory."
+        let to = expand("/tmp/shellutils_rm")
+        if !isdirectory(to)
+          call shellutils#mkdir(to)
+        endif
+        if rename(file, to . '/' . fnamemodify(file, ":t")) != 0
+          return 0
+        endif
+        call add(files, file)
+      elseif filereadable(file)
         if delete(file) == 0
           call add(files, file)
           let bufname = bufname(fnamemodify(file, ':p'))
@@ -276,9 +278,9 @@ function! shellutils#rm(bang, ...) "{{{1
             execute "bwipeout" bufname
           endif
         endif
+      else
+        echohl WarningMsg | echo "The '" . file . "' does not exist" | echohl NONE
       endif
-    else
-      echohl WarningMsg | echo "The '" . file . "' does not exist" | echohl NONE
     endif
   endfor
   echo len(files) ? "Removed " . string(files) . "!" : "Removed nothing"
