@@ -42,3 +42,13 @@ function! s:suite.rm_if_directory()
     redir END
     call s:assert.match(result, "Removed")
 endfunction
+
+function! s:suite.rm_dir()
+    call shellutils#mkdir('~/dir')
+    call s:assert.true(isdirectory(expand('~/dir')))
+    call s:assert.false(isdirectory(expand($HOME.'/.tmp/shellutils_rm/dir')))
+
+    call shellutils#rm('!', '~/dir')
+    call s:assert.false(isdirectory(expand('~/dir')))
+    call s:assert.true(isdirectory(expand($HOME.'/.tmp/shellutils_rm/dir')))
+endfunction
