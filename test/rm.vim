@@ -34,7 +34,7 @@ function! s:suite.rm_if_directory()
     call shellutils#mkdir('~/rm_test2')
     call shellutils#rm('!', '~/rm_test2')
     call s:assert.false(isdirectory(expand('~/rm_test2')))
-    call s:assert.true(isdirectory(expand($HOME.'/.tmp/shellutils_rm/rm_test2')))
+    call s:assert.true(isdirectory('/tmp/shellutils_rm/rm_test2'))
 
     call shellutils#mkdir('~/rm_test2')
     redir => result
@@ -46,9 +46,19 @@ endfunction
 function! s:suite.rm_dir()
     call shellutils#mkdir('~/dir')
     call s:assert.true(isdirectory(expand('~/dir')))
-    call s:assert.false(isdirectory(expand($HOME.'/.tmp/shellutils_rm/dir')))
+    call s:assert.false(isdirectory('/tmp/shellutils_rm/dir'))
 
     call shellutils#rm('!', '~/dir')
     call s:assert.false(isdirectory(expand('~/dir')))
-    call s:assert.true(isdirectory(expand($HOME.'/.tmp/shellutils_rm/dir')))
+    call s:assert.true(isdirectory('/tmp/shellutils_rm/dir'))
+endfunction
+
+function! s:suite.rm_dir2()
+    call shellutils#mkdir('~/dir2')
+    call s:assert.true(isdirectory(expand('~/dir2')))
+    call s:assert.false(isdirectory('/tmp/shellutils_rm/dir2'))
+
+    call shellutils#rm('!', '~/dir2')
+    call s:assert.false(isdirectory(expand('~/dir2')))
+    call s:assert.true(isdirectory('/tmp/shellutils_rm/dir2'))
 endfunction

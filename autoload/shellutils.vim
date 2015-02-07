@@ -262,9 +262,9 @@ function! shellutils#rm(bang, ...) "{{{1
     if !empty(a:bang) || nr2char(getchar()) ==? 'y'
       if isdirectory(file)
         "echo "This shellutils#rm does not support the removing directory."
-        let to = expand($HOME."/.tmp/shellutils_rm")
-        call shellutils#mkdir(to)
-        let dest = to . '/' . fnamemodify(file, ":t")
+        let l:tmp = "/tmp/shellutils_rm"
+        call shellutils#mkdir(l:tmp)
+        let dest = l:tmp ."/". fnamemodify(file, ":t")
 
         if rename(file, dest) == 0
           call add(files, file)
