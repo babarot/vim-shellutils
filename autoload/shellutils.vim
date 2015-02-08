@@ -261,7 +261,6 @@ function! shellutils#rm(bang, ...) "{{{1
 
     if !empty(a:bang) || nr2char(getchar()) ==? 'y'
       if isdirectory(file)
-        "echo "This shellutils#rm does not support the removing directory."
         let l:tmp = "/tmp/shellutils_rm"
         if !isdirectory(l:tmp)
           call shellutils#mkdir(l:tmp)
@@ -270,6 +269,8 @@ function! shellutils#rm(bang, ...) "{{{1
 
         if rename(file, dest) == 0
           call add(files, file)
+        else
+          echo "This shellutils#rm does not support the removing directory."
         endif
       elseif filereadable(file)
         if delete(file) == 0
