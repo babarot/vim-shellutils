@@ -262,6 +262,7 @@ function! shellutils#rm(bang, ...) "{{{1
     if !empty(a:bang) || nr2char(getchar()) ==? 'y'
       if isdirectory(file)
         let l:tmp = "/tmp/shellutils_rm"
+        let l:tmp = "/tmp"
         if !isdirectory(l:tmp)
           silent! call shellutils#mkdir(l:tmp)
         endif
