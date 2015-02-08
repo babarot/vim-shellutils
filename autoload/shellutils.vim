@@ -267,7 +267,7 @@ function! shellutils#rm(bang, ...) "{{{1
         "let dest = "shellutils_rm/" . fnamemodify(file, ":t")
 
         "let dest = "/tmp/".sha256(reltimestr(reltime()))[:7]
-        let dest = "/tmp/".s:random_string(8)
+        let dest = "/tmp/".s:random_string(10)
         "if !isdirectory(dest)
         "  silent! call shellutils#mkdir(dest)
         "endif
@@ -311,6 +311,7 @@ function! s:random_string(n)
     call add(s, (chars[s:rand(max)]))
   endfor
   let @+ = join(s, '')
+  return join(s, '')
 endfunction
 
 function! shellutils#scope()
