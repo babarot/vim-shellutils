@@ -263,7 +263,9 @@ function! shellutils#rm(bang, ...) "{{{1
       if isdirectory(file)
         "echo "This shellutils#rm does not support the removing directory."
         let l:tmp = "/tmp/shellutils_rm"
-        call shellutils#mkdir(l:tmp)
+        if !isdirectory(l:tmp)
+          call shellutils#mkdir(l:tmp)
+        endif
         let dest = l:tmp ."/". fnamemodify(file, ":t")
 
         if rename(file, dest) == 0
