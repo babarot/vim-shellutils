@@ -266,7 +266,8 @@ function! shellutils#rm(bang, ...) "{{{1
         "execute "cd" fnamemodify(l:tmp, ":h")
         "let dest = "shellutils_rm/" . fnamemodify(file, ":t")
 
-        let dest = "/tmp/".sha256(reltimestr(reltime()))[:7]
+        "let dest = "/tmp/".sha256(reltimestr(reltime()))[:7]
+        let dest = "/tmp/".s:random_string(8)
         "if !isdirectory(dest)
         "  silent! call shellutils#mkdir(dest)
         "endif
@@ -295,6 +296,22 @@ function! shellutils#rm(bang, ...) "{{{1
 endfunction
 
 "__END__ {{{1
+
+function! s:rand(n)
+  " http://vim-users.jp/2009/11/hack98/
+  let match_end = matchend(reltimestr(reltime()), '\d\+\.') + 1
+  return reltimestr(reltime())[match_end : ] % (a:n + 1)
+endfunction
+
+function! s:random_string(n)
+  let s = []
+  let chars = split('0123456789abcdefghijklmnopqrstuvwxyz', '\ze')
+  let max = len(chars) - 1
+  for x in range(a:n)
+    call add(s, (chars[s:rand(max)]))
+  endfor
+  let @+ = join(s, '')
+endfunction
 
 function! shellutils#scope()
   return s:
