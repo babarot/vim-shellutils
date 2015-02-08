@@ -30,11 +30,19 @@ function! s:suite.rm_if_no_argument()
     call s:assert.equals(getfsize(expand('%')), -1)
 endfunction
 
+function! s:suite.vim_has_cryptv()
+    call exists("+cryptv")
+    call has('patch-7.3.816')
+endfunction
+
 function! s:suite.rm_if_directory()
     ""call shellutils#mkdir('~/rm_test3')
     """call s:assert.true(!isdirectory('/tmp/shellutils_rm/rm_test3'))
     ""call shellutils#rm('!', '~/rm_test3')
     ""call s:assert.true(isdirectory('/tmp/shellutils_rm/rm_test3'))
+    ""if exists("+cryptv")
+    ""    call s:assert.skip("no cryptv")
+    ""endif
 
     call shellutils#mkdir('~/rm_test')
     call s:assert.true(isdirectory(expand('~/rm_test')))
