@@ -259,14 +259,17 @@ function! shellutils#rm(bang, ...) "{{{1
       redraw | echo 'Delete "' . file . '"? [y/N]: '
     endif
 
+    let file = fnamemodify(file, ":p")
     if !empty(a:bang) || nr2char(getchar()) ==? 'y'
       if isdirectory(file)
-        let l:tmp = "/tmp/shellutils_rm"
-        let l:tmp = "/tmp"
-        if !isdirectory(l:tmp)
-          silent! call shellutils#mkdir(l:tmp)
-        endif
-        let dest = l:tmp ."/". fnamemodify(file, ":t")
+        "let l:tmp = "/tmp/shellutils_rm"
+        "execute "cd" fnamemodify(l:tmp, ":h")
+        "let dest = "shellutils_rm/" . fnamemodify(file, ":t")
+
+        let dest = "/tmp/".sha256(reltimestr(reltime()))[:7]
+        "if !isdirectory(dest)
+        "  silent! call shellutils#mkdir(dest)
+        "endif
 
         if rename(file, dest) == 0
           call add(files, file)
