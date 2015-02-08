@@ -263,7 +263,7 @@ function! shellutils#rm(bang, ...) "{{{1
       if isdirectory(file)
         let l:tmp = "/tmp/shellutils_rm"
         if !isdirectory(l:tmp)
-          call shellutils#mkdir(l:tmp)
+          silent! call shellutils#mkdir(l:tmp)
         endif
         let dest = l:tmp ."/". fnamemodify(file, ":t")
 
