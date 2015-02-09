@@ -1,3 +1,11 @@
+let s:is_windows = has('win16') || has('win32') || has('win64')
+let s:is_cygwin = has('win32unix')
+let s:is_win = s:is_cygwin || s:is_windows
+let s:is_mac = !s:is_windows && !s:is_cygwin
+      \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+      \    (!executable('xdg-open') &&
+      \    system('uname') =~? '^darwin'))
+
 let s:suite = themis#suite('rm')
 let s:assert = themis#helper('assert')
 let s:file = expand('~/rm_test')
@@ -43,6 +51,9 @@ function! s:suite.rm_if_directory()
     ""if exists("+cryptv")
     ""    call s:assert.skip("no cryptv")
     ""endif
+    if s:is_win
+        call s:assert.skip("windows")
+    endif
 
     call shellutils#mkdir('~/rm_test')
     call s:assert.true(isdirectory(expand('~/rm_test')))
