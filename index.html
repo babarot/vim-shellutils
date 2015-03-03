@@ -34,11 +34,14 @@ $(function(){
 //  });
 //});
 window.onload = function() {
-    // 
-    var clip = new ZeroClipboard(document.getElementByClassName("btn"));
-    clip.on("ready", function() {
-    });
-};
+    var elements = document.getElementsByTagName("a");
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].className == "btn") {
+            var clip = new ZeroClipboard(elements[i]);
+            clip.on("ready", function() {
+            });
+        }
+    };
 </script>
 
 </head>
@@ -65,9 +68,6 @@ window.onload = function() {
 </tr>
 </tbody>
 </table>
-
-<div class="multi" title="vim4"><a  href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></div>
-<div class="multi" title="vim4"><img src="images/clipboard.png" alt="Copy to clipboard"></div>
 
 </body>
 </html>
