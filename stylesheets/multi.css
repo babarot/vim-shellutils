@@ -1,0 +1,25 @@
+.mmlclip {
+ display: none;
+}
+
+.clip_button {
+ display: inline;
+ color: #000;
+ background-color: #FCC;
+ margin: 1px;
+ padding: 2px 4px;
+ border-right: 1px black solid;
+ border-bottom: 1px black solid;
+ border-top: 1px gray solid;
+ border-left: 1px gray solid;
+ line-height: 200%;
+}
+
+.clip_button.active {
+ background-color: #aaa;
+ border-right: 1px gray solid;
+ border-bottom: 1px gray solid;
+ border-top: 1px black solid;
+ border-left: 1px black solid;
+}
+
