@@ -24,4 +24,3 @@ wget.on( "ready", function( readyEvent ) {
     alert("Copied text to clipboard: " + event.data["text/plain"] );
   } );
 } );
-
