@@ -36,6 +36,12 @@ window.onload = function() {
     clip.on("ready", function() {
     });
 };
+window.onload = function() {
+    // 
+    var clip = new ZeroClipboard(document.getElementById("btn2"));
+    clip.on("ready", function() {
+    });
+};
 </script>
 
 </head>
@@ -59,7 +65,7 @@ window.onload = function() {
 <td>Wget</td>
 <td>bash -c "$(wget -qO - <a href="https://raw.githubusercontent.com/b4b4r07/dotfiles/master/etc/install">dot.b4b4r07.com</a>)"</td>
 
-<td><a id="wget-button" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
+<td><a id="btn2" data-clipboard-text='bash -c "$(wget -qO - dot.b4b4r07.com)"' href='#'><img src="images/clipboard.png" alt="Copy to clipboard"></a></td>
 </tr>
 </tbody>
 </table>
