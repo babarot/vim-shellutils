@@ -1,11 +1,8 @@
-//<div class="mmlclip" title="MML@***,***,***;">ボタン</div>
-
 window.onload = function() {
-//	ZeroClipboard.setMoviePath("http://blog-imgs-47.fc2.com/b/l/o/blogfourthline/ZeroClipboard.swf");
 
 	var elements = document.getElementsByTagName("div");
 	for (var i = 0; i < elements.length; i++) {
-		if (elements[i].className == "mmlclip") {
+		if (elements[i].className == "multi") {
 			var mml = elements[i].title;
 			if (mml.match("^MML@") == null)
 				continue;
@@ -26,7 +23,7 @@ window.onload = function() {
 	}
 	
 	function mmlClipComplete(client, text) {
-		alert("クリップボードにコピーしました。");
+		alert("copytoclip");
 	}
 
 };
