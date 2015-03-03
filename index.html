@@ -3,9 +3,7 @@
 <head>
 <title>Tell me Tokyo</title>
 <link rel="stylesheet" type="text/css" href="stylesheets/stylesheets.css">
-<link rel="stylesheet" href="stylesheets/multi.css"/>
 <script type="text/javascript" src="js/ZeroClipboard.js"></script>
-<script type="text/javascript" src="js/multi.js" charset="UTF-8"></script>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.5/ZeroClipboard.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
@@ -33,20 +31,21 @@ $(function(){
 //    $('p.toolTip').addClass('invisible');
 //  });
 //});
-//window.onload = function() {
-//    var elements = document.getElementsByTagName("a");
-//    for (var i = 0; i < elements.length; i++) {
-//        if (elements[i].className == "btn") {
-//            var clip = new ZeroClipboard(elements[i]);
-//            clip.on("ready", function() {
-//            });
-//        }
-//    };
-    window.onload = function() {
-        var clip = new ZeroClipboard(document.getElementById(("btn"));
-        clip.on("ready", function() {
-        });
+window.onload = function() {
+    var elements = document.getElementsByTagName("a");
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].className == "btn") {
+            var clip = new ZeroClipboard(elements[i]);
+            clip.on("ready", function() {
+            });
+        }
+        }
     };
+//    window.onload = function() {
+//        var clip = new ZeroClipboard(document.getElementById(("btn"));
+//        clip.on("ready", function() {
+//        });
+//    };
 </script>
 
 </head>
