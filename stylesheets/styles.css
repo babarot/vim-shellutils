@@ -14,6 +14,7 @@ html {
   background: #6c7989 -ms-linear-gradient(#6c7989, #434b55) fixed;
   background: #6c7989 linear-gradient(#6c7989, #434b55) fixed;
   */
+  min-height: 100%;
   font-family:Lato,'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
   -ms-text-size-adjust: 100%; /* 2 */
@@ -26,6 +27,7 @@ html {
 }
 
 body {
+  min-height:100%;
   padding: 50px 0;
   margin: 0;
   font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
