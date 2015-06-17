@@ -1,14 +1,13 @@
-vim-shellutils
-===
+# vim-shellutils
+
 
 [![Build Status](https://travis-ci.org/b4b4r07/vim-shellutils.svg?branch=master)](https://travis-ci.org/b4b4r07/vim-shellutils)
 [![Build status](https://ci.appveyor.com/api/projects/status/nth12he8ajal7d4o?svg=true)](https://ci.appveyor.com/project/b4b4r07/vim-shellutils)
 
-## Overview
 
 `vim-shellutils` is a simple, UNIX Shell commands (e.g. `/bin/ls`) emulator that works even in a non-Unix environment (Windows ;-), written in Vim script.
 
-***DEMO***
+***DEMO:***
 
 ![vim-shellutils](./shellutils.gif "vim-shellutils")
 
@@ -22,7 +21,7 @@ If even Vim and `vim-shellutils`, it is possible to realize a shell command mock
 
 ## Requirement
 
-Vim 7.3 or more
+- Vim 7.3 or more
 
 ## Usage
 
@@ -59,9 +58,10 @@ Unlike a complete UNIX shell command, the command is emulated by `vim-shellutils
 - Example (when you're editing the `~/.vimrc`):
 
 	`:Cp ~/test` and `:Cp ~/.vimrc ~/test` are the same
+	
 	`:Rm ` and `:Rm ~/.vimrc` are the same
 
-This means that it is possible to perform more easily shell command mock. Again, for more detailed description, please refer to the plugin's [help](./doc/vim-shellutils.txt)
+This means that it is possible to perform more easily shell command mock. Again, for more detailed description, please refer to the plugin's [help](./doc/vim-shellutils.txt).
 
 ## Installation
 

@@ -1,6 +1,6 @@
 *shellutils.txt*  Provides shell-like commands from cmd-line
 
-Version: 1.0
+Version: 1.1
 Author: b4b4r07 (https://github.com/b4b4r07)
 License: MIT License
 Repository: https://github.com/b4b4r07/vim-shellutils
