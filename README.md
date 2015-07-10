@@ -1,32 +1,50 @@
+<p align="center">
+<img src="doc/shellutils.png">
+</p>
+
+<br>
+
+<p align="center">
+<b><a href="#vim-shellutils">About</a></b>
+|
+<b><a href="#description">Description</a></b>
+|
+<b><a href="#usage">Usage</a></b>
+|
+<b><a href="#installation">Installation</a></b>
+|
+<b><a href="license">License</a></b>
+</p>
+
+<br>
+
 vim-shellutils
 ===
 
-[![Build Status](https://travis-ci.org/b4b4r07/vim-shellutils.svg?branch=master)](https://travis-ci.org/b4b4r07/vim-shellutils)
-[![Build status](https://ci.appveyor.com/api/projects/status/nth12he8ajal7d4o?svg=true)](https://ci.appveyor.com/project/b4b4r07/vim-shellutils)
+[![](https://img.shields.io/travis/b4b4r07/vim-shellutils.svg?style=flat-square)][travis]
+[![](https://img.shields.io/appveyor/ci/b4b4r07/vim-shellutils.svg?style=flat-square)][appveyor]
+[![](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)][license]
 
-
-`vim-shellutils` is a simple, UNIX Shell commands (e.g. `/bin/ls`) emulator that works even in a non-Unix environment (Windows ;-), written in Vim script.
+`vim-shellutils` is a simple, UNIX Shell commands (e.g., `/bin/ls`) emulator written in Vim script.
 
 ***DEMO:***
 
-![vim-shellutils](./shellutils.gif "vim-shellutils")
+![vim-shellutils](doc/shellutils.gif)
 
 ## Description
 
-`vim-shellutils` is a simple tool that provides UNIX shell-like commands such as `'rm'`, `'ls'`, and so on.
+`vim-shellutils` is a simple Vim plugin that provides UNIX shell-like commands such as `rm`, `ls`, and so on. The fact that written in Vim script independently of the external command or other tools will bring numerous benefits to your Vim life. 
 
-The fact that is written in Vim script only will bring you a lot of advantages. For example, if you run the shell command in light manner, you can emulate the shell command without exiting Vim. With further say, this fact shows that does not depend on the platform you want to run. This means that Windows is OK.
+For example, when you want to run the command from the command line, it is troublesome to have to exit Vim. Thanks to this plugin, you can run the shell command without quit Vim. With further say, this fact shows that does not depend on the platform you want to run. Thus, it means that Windows is OK, too.
 
-If even Vim and `vim-shellutils`, it is possible to realize a shell command mock.
+If only you had Vim and this plugin, you will be able to reproduce the shell command.
 
-## Requirement
-
-- Vim 7.3 or more
+<p align="right"><a href="#vim-shellutils">:arrow_up:</a></p>
 
 ## Usage
 
 - **What is the command you want to use?:** `ls`
-- **Let's capitalize:** `Ls`
+- **Capitalize:** `Ls`
 - **Run from the Vim command line:** `:Ls`
 - Please `:h :Ls` if you have any questions
 
@@ -51,7 +69,9 @@ Other commands that are available:
 
 For more usage and details, see [docmentation](./doc/vim-shellutils.txt).
 
-### Features
+<p align="right"><a href="#vim-shellutils">:arrow_up:</a></p>
+
+## Advantage
 
 Unlike a complete UNIX shell command, the command is emulated by `vim-shellutils` is optimized for Vim. In other words, the grammar of `vim-shellutils` command and shell command is not the same at all. It is when the argument is less than the original. The emulated command interpret the current buffer as an argument in the automatic when the argument is omitted.
 
@@ -63,32 +83,26 @@ Unlike a complete UNIX shell command, the command is emulated by `vim-shellutils
 
 This means that it is possible to perform more easily shell command mock. Again, for more detailed description, please refer to the plugin's [help](./doc/vim-shellutils.txt).
 
+<p align="right"><a href="#vim-shellutils">:arrow_up:</a></p>
+
 ## Installation
 
-### Manually
+[Neobundle](https://github.com/Shougo/neobundle.vim) / [Vundle](https://github.com/VundleVim/Vundle.vim) / [vim-plug](https://github.com/junegunn/vim-plug)
 
-- [Pathogen](https://github.com/tpope/vim-pathogen)
+```vim
+NeoBundle 'b4b4r07/vim-shellutils'
+Plugin    'b4b4r07/vim-shellutils'
+Plug      'b4b4r07/vim-shellutils'
+```
 
-	Put all files under `$VIM`. Install with the following command.
-
-		git clone https://github.com/b4b4r07/vim-shellutils ~/.vim/bundle/vim-shellutils
-
-### Plugin Manager
-
-Add the following configuration to your `.vimrc`.
-
-- [NeoBundle](https://github.com/Shougo/neobundle.vim)
-
-		NeoBundle 'b4b4r07/vim-shellutils'
-
-- [Vundle]()
-
-		Plugin 'b4b4r07/vim-shellutils'
-
-- [vim-plug]()
-
-		Plug 'b4b4r07/vim-shellutils'
+<p align="right"><a href="#vim-shellutils">:arrow_up:</a></p>
 
 ## Licence
 
-The MIT License ([MIT](http://opensource.org/licenses/MIT))
+ [MIT][license] © [b4b4r07](http://b4b4r07.com)
+
+[travis]: https://travis-ci.org/b4b4r07/vim-shellutils
+[appveyor]: https://ci.appveyor.com/project/b4b4r07/vim-shellutils
+[license]: https://raw.githubusercontent.com/b4b4r07/dotfiles/master/doc/LICENSE-MIT.txt
+
+<p align="right"><a href="#vim-shellutils">:arrow_up:</a></p>
