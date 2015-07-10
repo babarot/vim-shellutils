@@ -2,8 +2,6 @@
 <img src="doc/shellutils.png">
 </p>
 
-<br>
-
 <p align="center">
 <b><a href="#vim-shellutils">About</a></b>
 |
@@ -13,7 +11,7 @@
 |
 <b><a href="#installation">Installation</a></b>
 |
-<b><a href="license">License</a></b>
+<b><a href="#license">License</a></b>
 </p>
 
 <br>
@@ -73,7 +71,7 @@ For more usage and details, see [docmentation](./doc/vim-shellutils.txt).
 
 ## Advantage
 
-Unlike a complete UNIX shell command, the command is emulated by `vim-shellutils` is optimized for Vim. In other words, the grammar of `vim-shellutils` command and shell command is not the same at all. It is when the argument is less than the original. The emulated command interpret the current buffer as an argument in the automatic when the argument is omitted.
+Unlike a complete UNIX shell command, the command is emulated by `vim-shellutils` is optimized for Vim. In other words, the synopsis of the commands that are provided by this plugin band shell command is not the same at all. It is when the argument is less than the original. The emulated command interpret the current buffer as an argument in the automatic when the argument is omitted.
 
 - Example (when you're editing the `~/.vimrc`):
 
@@ -87,7 +85,7 @@ This means that it is possible to perform more easily shell command mock. Again,
 
 ## Installation
 
-[Neobundle](https://github.com/Shougo/neobundle.vim) / [Vundle](https://github.com/VundleVim/Vundle.vim) / [vim-plug](https://github.com/junegunn/vim-plug)
+[Neobundle](https://github.com/Shougo/neobundle.vim) | [Vundle](https://github.com/VundleVim/Vundle.vim) | [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
 NeoBundle 'b4b4r07/vim-shellutils'
@@ -99,7 +97,7 @@ Plug      'b4b4r07/vim-shellutils'
 
 ## Licence
 
- [MIT][license] © [b4b4r07](http://b4b4r07.com)
+[MIT][license] © [b4b4r07](http://b4b4r07.com)
 
 [travis]: https://travis-ci.org/b4b4r07/vim-shellutils
 [appveyor]: https://ci.appveyor.com/project/b4b4r07/vim-shellutils
